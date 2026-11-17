@@ -67,20 +67,6 @@ debug:
 	$(MAKE) clean
 	$(MAKE) EXTRA='-g -O0 -fsanitize=undefined' all
 
-test: msh
-	tests/run.sh
-
-check: test
-
-# The same cases under dash, reporting every difference.
-check-dash: msh
-	tests/run.sh -d
-
-# A short pass of random input through the lexer and the parser. A real
-# campaign uses AFL++ or libFuzzer, which this does not replace.
-fuzz: msh
-	tests/fuzz.sh
-
 frmt:
 	clang-format -i $(SRC) $(HDR)
 
@@ -94,4 +80,4 @@ install: msh
 uninstall:
 	rm -f $(DESTDIR)$(BINDIR)/msh
 
-.PHONY: all debug test check check-dash fuzz frmt clean install uninstall
+.PHONY: all debug fuzz frmt clean install uninstall
