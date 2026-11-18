@@ -168,8 +168,9 @@ fillbuf(void)
 	}
 	top->len = n;
 	top->pos = 0;
-	if (vflag && write(2, top->buf, (size_t)n) < 0)
+	if (vflag && write(2, top->buf, (size_t)n) < 0) {
 		; /* a failed echo of the input is not worth a message */
+	}
 	return 0;
 }
 
