@@ -211,8 +211,9 @@ exportvar(const char *name, int flags)
 	Var *v;
 
 	v = makevar(name);
-	if ((flags & VREADONLY) && (v->flags & VUNSET) == 0)
+	if ((flags & VREADONLY) && (v->flags & VUNSET) == 0) {
 		; /* readonly on a set variable needs no value */
+	}
 	v->flags |= flags;
 	sideeffect(v);
 }
